@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sana Bir Mesajım Var Rukiye✨</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
+            background: #1a1a2e;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .container { width: 90%; max-width: 550px; padding: 20px; }
+
+        .heart { font-size: 3rem; margin-bottom: 10px; color: #4ecca3; animation: pulse 2s infinite; }
+
+        .message-box {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 25px;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #quote { font-size: 1.2rem; font-style: italic; transition: opacity 0.5s; color: #e0e0e0; }
+
+        .btn-random {
+            background: #4ecca3;
+            color: #1a1a2e;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(78, 204, 163, 0.3);
+            margin-bottom: 30px;
+        }
+
+        .btn-random:hover { transform: translateY(-3px); background: #45b393; }
+
+        #music-container { width: 100%; border-radius: 15px; overflow: hidden; background: rgba(0,0,0,0.3); }
+
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="heart">✨</div>
+        <h1 style="font-weight: 300; letter-spacing: 2px;">RUKİYE HANIM'A ÖZEL</h1>
+        
+        <div class="message-box">
+            <p id="quote">Butona her bastığında senin için yeni bir şarkı ve bir not çıkacak...</p>
+        </div>
+
+        <button class="btn-random" onclick="nextStep()">🎵 Sıradaki Sürprizi Gör</button>
+
+        <div id="music-container">
+            </div>
+    </div>
+
+    <script>
+        // 8 Şarkı ve 8 Söz (Sıralı çalışacak)
+        const content = [
+            { song: "https://www.youtube.com/embed/hBnrtF-37hg?si=dd8gZVKzmIf4Nk_V", text: "Senin şu bitmek bilmeyen pozitif enerjin dünyayı güzelleştiriyor. ✨" },
+            { song: "https://www.youtube.com/embed/qjIXTe6IRUM?si=ifC2gzzarCADesg3", text: "Gülüşün o kadar içten ki, insanın modunu saniyeler içinde yükseltiyor. 🌸" },
+            { song: "https://www.youtube.com/embed/t5tLvVSWWkU?si=HfriYxxoWHMtUK7y", text: "Senin o kendine has duruşun ve zarafetin her zaman fark ediliyor. 💫" },
+            { song: "https://www.youtube.com/embed/wMdnGwOuhoI?si=Mt-sLji-zHqINYdS", text: "Detaylara verdiğin önem ve ince düşüncelerin seni çok özel kılıyor. 🎀" },
+            { song: "https://www.youtube.com/embed/12dYpQabC90?si=OSCa9v7oFKil1SOV", text: "Hayatımdaki en renkli ve en samimi insan olduğun içi teşekkür ederim. 🎨" },
+            { song: "https://www.youtube.com/embed/2fEywKZnIVM?si=8-wgrVwJyErt5XKQ", text: "Seninle konuşmak, en sevdiğim şarkıyı dinlemek gibi huzur verici. ☕" },
+            { song: "https://www.youtube.com/embed/CmY6Tkqkfrs?si=IRC_jg2ciM6-tbnA", text: "Işığınla çevrendeki herkese neşe saçıyorsun, hep böyle kal! 🌟" },
+            { song: "https://www.youtube.com/embed/dVhpmz23n1s?si=Mk3mwAft0TsDLbIQ", text: "Bu da listenin sonu ama senin güzelliğin ve tatlılığın sonsuz... ❤️" }
+        ];
+
+        let currentIndex = 0;
+
+        function nextStep() {
+            const container = document.getElementById('music-container');
+            const quoteElement = document.getElementById('quote');
+            
+            // Sırayla gitmek için
+            const currentItem = content[currentIndex];
+
+            // Yazıyı güncelle
+            quoteElement.style.opacity = 0;
+            setTimeout(() => {
+                quoteElement.innerText = currentItem.text;
+                quoteElement.style.opacity = 1;
+            }, 400);
+
+            // Videoyu güncelle
+            container.innerHTML = `
+                <iframe width="100%" height="300" 
+                    src="${currentItem.song}?autoplay=1" 
+                    frameborder="0" allow="autoplay; encrypted-media" 
+                    allowfullscreen style="border-radius:15px;">
+                </iframe>
+            `;
+
+            // Index'i arttır (8'e ulaşınca başa döner)
+            currentIndex = (currentIndex + 1) % content.length;
+        }
+    </script>
+</body>
+</html>
